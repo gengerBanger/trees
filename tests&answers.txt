@@ -1,0 +1,170 @@
+
+
+~~Remove 0
+
+~~Search 2
+Node not found
+
+~~Insert 0
+
+
+
+~~Remove 1
+
+~~Search 1
+Node not found
+
+~~Insert 1
+
+
+
+~~Remove 0
+
+~~Search 0
+Node not found
+
+~~Insert 0
+
+
+
+~~Remove 0
+
+~~Search 0
+Node not found
+
+~~Insert 0
+
+
+
+~~Remove 0
+
+~~Search 0
+Node not found
+
+~~Insert 0
+
+
+
+~~Remove 0
+
+~~Search 0
+Node not found
+
+~~Insert 0
+
+
+
+~~Remove 0
+
+~~Search 0
+Node not found
+
+~~Insert 0
+
+
+
+~~Remove 0
+
+~~Search 0
+Node not found
+
+~~Insert 0
+
+
+
+~~Remove 0
+
+~~Search 0
+Node not found
+
+~~Insert 0
+
+
+
+~~Remove 0
+
+~~Search 0
+Node not found
+
+~~Insert 0
+
+
+
+~~Remove 0
+
+~~Search 0
+Node not found
+
+~~Insert 0
+
+
+
+~~Remove 0
+
+~~Search 0
+Node not found
+
+~~Insert 0
+
+
+                         73
+
+            32_________________________&                         
+
+      12____________62            .____________.           
+
+   6______&      &______&     .______.      .______.     
+
+ &___&   .___.  .___.   .___.  .___.   .___.  .___.   .___.  
+
+
+                         100
+
+            10_________________________&                         
+
+      -44____________39            .____________.           
+
+   &______&      18______70     .______.      .______.     
+
+ .___.   .___.  &___&   &___&  .___.   .___.  .___.   .___.  
+
+
+                         100
+
+            10_________________________&                         
+
+      -44____________39            .____________.           
+
+   &______&      18______70     .______.      .______.     
+
+ .___.   .___.  &___&   &___&  .___.   .___.  .___.   .___.  
+
+
+                         100
+
+            10_________________________&                         
+
+      -44____________39            .____________.           
+
+   &______0      18______70     .______.      .______.     
+
+ .___.   &___&  &___&   &___&  .___.   .___.  .___.   .___.  
+
+
+
+~~Remove 0
+
+~~Search 0
+Node not found
+
+~~Insert 0
+
+
+
+~~Remove 0
+
+~~Search 0
+Node not found
+
+~~Insert 0
+
