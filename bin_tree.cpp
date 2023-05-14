@@ -58,9 +58,9 @@ void BinTree ::mapRemoving() {// deleting a dictionary
         iter->second.clear();
     }
 }
-BinTree :: BinTree (int key){
-    switch (key) {
-        case 1:{
+BinTree :: BinTree (keysForInput new_key){
+    switch (new_key) {
+        case keysForInput::randomKey:{
             int * amountOfNodes = new int();
             srand(time(nullptr));
             std :: cout << "\t~~Enter the amount of nodes~~\n";
@@ -76,7 +76,7 @@ BinTree :: BinTree (int key){
             amountOfElements = GetSize(GetRoot());
             break;
         }
-        case 2:{
+        case keysForInput::consoleKey:{
             int * value = new int;
             while(std :: cin >> *value) {
                 Node *item = new Node;
@@ -88,7 +88,7 @@ BinTree :: BinTree (int key){
             amountOfElements = GetSize(GetRoot());
             break;
         }
-        case 3:{
+        case keysForInput::fileKey:{
             int * amountOfNodes = new int();
             srand(time(nullptr));
             std :: ifstream new_thread;

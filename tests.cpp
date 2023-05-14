@@ -9,7 +9,6 @@ Test :: Test(const int value) {
     amountOfTests = value;
     std :: ofstream new_thread1(R"(D:\\CLionProjects\\bin_tree\\test&answers.txt)");
     srand(time(nullptr));
-    keysForInput new_key{keysForInput::arrayKey};
     while(amountOfTests){
         int amountOfNodes = rand() % 11 + 5;
         int arrayOfNodes[amountOfNodes];

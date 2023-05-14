@@ -11,6 +11,7 @@ struct Node{
     Node * right;
     Node * left;
 };
+enum class keysForInput{randomKey = 1,consoleKey,fileKey};
 class BinTree{
 private:
     Node * root = nullptr;
@@ -24,7 +25,7 @@ private:
     Node * searchForRemove(int value, Node * node);
     void deleteTree(Node * root);
 public:
-    BinTree(int key);
+    BinTree(keysForInput new_key);
     BinTree(const int *arr, const int &demArr);
     ~BinTree();
     Node * GetRoot();
@@ -41,5 +42,5 @@ public:
     void reverseEnumeration(Node * root);
     void symmetricalEnumeration (Node * root);
 };
-enum class keysForInput{randomKey = 1,consoleKey,fileKey,arrayKey};
+
 #endif //BIN_TREE_BIN_TREE_H
