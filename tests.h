@@ -1,7 +1,6 @@
 //
 // Created by aleks on 11.05.2023.
 //
-
 #ifndef BIN_TREE_TESTS_H
 #define BIN_TREE_TESTS_H
 #include "bin_tree.h"

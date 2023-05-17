@@ -3,6 +3,7 @@
 //
 #include <iostream>
 #include "tests.h"
+#include "bin_tree.h"
 #include <cmath>
 #include <fstream>
 Test :: Test(const int value) {
@@ -22,24 +23,24 @@ Test :: Test(const int value) {
     new_thread1.close();
 }
 
-void Test :: testCreation( BinTree &tree, const int * array, const int & arrayDimension, std :: ofstream & new_thread1) {
+void Test :: testCreation( BinTree &Tree, const int * array, const int & arrayDimension, std :: ofstream & new_thread1) {
     int * elementToRemove = new int (array[rand() % arrayDimension]);
     int * elementToSearch = new int (array[rand() % arrayDimension] - rand() % 2);
     int * elementToInsert =  new int (rand() % 100);
     new_thread1 << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     new_thread1 << "Tree :\n";
-    tree.print(new_thread1);
+    Tree.print(new_thread1);
     new_thread1 << '\n';
     new_thread1 << "~~Remove " + std::to_string(*elementToRemove) + '\n';
-    tree.remove(*elementToRemove);
-    tree.print(new_thread1);
+    Tree.remove(*elementToRemove);
+    Tree.print(new_thread1);
     new_thread1 << '\n';
     new_thread1 << "~~Search " + std::to_string(*elementToSearch) + '\n';
-    if(tree.search(*elementToSearch, tree.GetRoot())) new_thread1 << "Node found\n";
+    if(Tree.search(*elementToSearch, Tree.GetRoot())) new_thread1 << "Node found\n";
     else new_thread1 << "Node not found\n";
     new_thread1 << '\n';
     new_thread1 << "~~Insert " + std::to_string(*elementToInsert) + '\n';
-    tree.insert(*elementToInsert);
-    tree.print(new_thread1);
+    Tree.insert(*elementToInsert);
+    Tree.print(new_thread1);
     new_thread1 << '\n';
 }

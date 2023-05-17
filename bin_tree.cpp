@@ -6,57 +6,18 @@
 #include <iostream>
 #include <cmath>
 #include <fstream>
-Node * BinTree :: getMaxNode(Node * root) {
-    if(!root->right) return root;
-    while (root->right->right) {
-        root = root->right;
-    }
-    return root;
-}
-int BinTree :: depthCount(Node* root)
-{
-    if (!root) return 0;
-    return 1 + fmax(depthCount(root->left), depthCount(root->right));
-}
 void BinTree ::  recursiveFilling(Node * node, Node * buffRoot){ // filling in the tree
     if(buffRoot){
         if(node->data > buffRoot->data){
             if(buffRoot->right != nullptr) recursiveFilling(node, buffRoot->right);
             else buffRoot->right = node;
         }
-        if(node->data < buffRoot->data) {
+        /*if(node->data < buffRoot->data)*/else {
             if (buffRoot->left != nullptr)recursiveFilling(node, buffRoot->left);
             else buffRoot->left = node;
         }
     }
     else root = node;
-}
-void BinTree :: mapFilling( Node * buffRoot, int level){ // filling in the dictionary of elements by levels
-    if(buffRoot){
-        mapOfLevels[level].push_back(std ::to_string(buffRoot->data));
-        ++level;
-        mapFilling(buffRoot->left,level);
-        mapFilling(buffRoot->right,level);
-    }
-    else {
-        int * buffLVL = new int(level);
-        mapOfLevels[level].push_back("&");
-        int * i = new int(1);
-        while(++(*buffLVL) < depth){
-            for(int j = 0; j < *i;j++){
-                mapOfLevels[*buffLVL].push_back(".");
-                mapOfLevels[*buffLVL].push_back(".");
-            }
-            *i *= 2;
-        }
-        delete i;
-        delete buffLVL;
-    }
-}
-void BinTree ::mapRemoving() {// deleting a dictionary
-    for(auto iter = mapOfLevels.begin();iter != mapOfLevels.end();iter++ ){
-        iter->second.clear();
-    }
 }
 BinTree :: BinTree (keysForInput new_key){
     switch (new_key) {
@@ -119,15 +80,6 @@ BinTree::BinTree(const int *arr, const int &demArr) {
     delete value;
     depth = depthCount(root) + 1;
     amountOfElements = GetSize(GetRoot());
-}
-
-void BinTree ::deleteTree(Node * root) {
-    if(root){
-        Node * buff = root;
-        deleteTree(buff->right);
-        deleteTree(buff->left);
-        delete root;
-    }
 }
 BinTree :: ~BinTree(){
     deleteTree(root);
@@ -226,23 +178,6 @@ void BinTree ::print(std :: ofstream & new_thread) {
     delete increaseDepth;
     delete amountOfSpaces;
 }
-Node * BinTree ::GetRoot() {
-    return root;
-}
-int BinTree :: GetSize(Node * buff) {
-    if (buff) {
-        ++amountOfElements;
-        GetSize(buff->left);
-        GetSize(buff->right);
-        return amountOfElements;
-    }
-}
-int BinTree ::GetDepth() {
-    return depth;
-}
-bool BinTree ::empty() {
-    return amountOfElements;
-}
 void BinTree ::insert(int value) { // inserting a new node
     Node *new_node = new Node;
     new_node->data = value;
@@ -255,19 +190,6 @@ Node * BinTree ::search(int value, Node * node) {// searching of node
         if(node->data > value) return search(value, node->left);
         if(node->data < value) return search(value, node->right);
         if(node->data == value) return node;
-    }
-    else return nullptr;
-}
-Node * BinTree ::searchForRemove(int value, Node *node) {// searching the root-node for an element
-    if(node != nullptr){
-        if(node->data > value){
-            if((node->left != nullptr && node->left->data == value) || (node->right != nullptr && node->right->data == value)) return node;
-            else return searchForRemove(value, node->left);
-        }
-        if(node->data < value) {
-            if((node->right != nullptr && node->right->data == value) || (node->left != nullptr && node->left->data == value)) return node;
-            else return searchForRemove(value, node->right);
-        }
     }
     else return nullptr;
 }
@@ -287,17 +209,17 @@ void BinTree ::remove(int value){
                             buff->left = *buffLeftDescendant;
                         }
                         else buffMaxNode->right = nullptr;
-                        root = buff;
+                            root = buff;
                     }
                     else {
                         root = buffMaxNode;
                     }
                     root->right = *buffRightDescendant;
-                    if(!buffMaxNode-> right)root->left = *buffLeftDescendant;
+                    if(!(buffMaxNode-> right))root->left = *buffLeftDescendant;
                 }
                 else{
                     delete root;
-                    root->left = *buffLeftDescendant;
+                    root = *buffLeftDescendant;
                 }
                 delete buffLeftDescendant;
                 delete buffRightDescendant;
@@ -338,6 +260,7 @@ void BinTree ::remove(int value){
                                     }
                                     else buffMaxNode->right = nullptr;
                                     searchResult->left = buff;
+
                                 }
                                 else {
                                     searchResult->left = buffMaxNode;
@@ -389,7 +312,7 @@ void BinTree ::remove(int value){
                             }
                             else{
                                 delete searchResult->left;
-                                searchResult->right = *buffLeftDescendant;
+                                searchResult->left = *buffLeftDescendant;
                             }
                             delete buffLeftDescendant;
                             delete buffRightDescendant;
