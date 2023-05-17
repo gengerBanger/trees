@@ -12,7 +12,6 @@ struct Node{
     Node * right;
     Node * left;
 };
-enum class keysForInput{randomKey = 1,consoleKey,fileKey};
 class BinTree : public tree<Node> {
 private:
     void recursiveFilling(Node * node, Node * buffRoot) override;

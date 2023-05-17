@@ -17,8 +17,9 @@ private:
     void rightTurn(RB_node * node);
     void leftTurn(RB_node * node);
 public:
-    RedBlackTree();
+    RedBlackTree(keysForInput new_key);
+    RedBlackTree(const int *arr, const int &demArr);
     ~RedBlackTree();
-
+    void insert (int value) override;
 };
 #endif //BIN_TREE_REDBLACK_TREE_H

@@ -8,6 +8,7 @@
 #include <fstream>
 #ifndef BIN_TREE_TREE_H
 #define BIN_TREE_TREE_H
+enum class keysForInput{randomKey = 1,consoleKey,fileKey};
 template <typename Type>
 class tree{
 protected:
