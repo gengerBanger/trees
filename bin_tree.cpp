@@ -84,7 +84,7 @@ BinTree::BinTree(const int *arr, const int &demArr) {
 BinTree :: ~BinTree(){
     deleteTree(root);
 }
-void BinTree ::insert(int value) { // inserting a new node
+void BinTree ::insert(int &value) { // inserting a new node
     Node *new_node = new Node;
     new_node->data = value;
     new_node->left = new_node->right = nullptr;

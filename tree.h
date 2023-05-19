@@ -188,7 +188,7 @@ public:
         delete increaseDepth;
         delete amountOfSpaces;
     }
-    virtual void insert(int value) = 0;
+    virtual void insert(int &value) = 0;
     Type * search(int value, Type * node){
         if(node != nullptr){
             if(node->data > value) return search(value, node->left);
@@ -197,7 +197,7 @@ public:
         }
         else return nullptr;
     }
-    void remove(int value){
+    virtual void remove(int value){
         if(search(value, root)){
             if(value == root->data){
                 if(root->left){
