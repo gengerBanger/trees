@@ -11,7 +11,7 @@ void RedBlackTree ::recursiveFilling(RB_node *node, RB_node *buffRoot) {
                 node->color = 1;
                 buffRoot->right = node;
                 node->parent = buffRoot;
-                balancing(node);
+                if(buffRoot->color == 1)balancing(node);
             }
         }
         if(node->data < buffRoot->data) {
@@ -20,7 +20,7 @@ void RedBlackTree ::recursiveFilling(RB_node *node, RB_node *buffRoot) {
                 node->color = 1;
                 buffRoot->left = node;
                 node->parent = buffRoot;
-                balancing(node);
+                if(buffRoot->color == 1)balancing(node);
             }
         }
     }
@@ -30,33 +30,41 @@ void RedBlackTree ::recursiveFilling(RB_node *node, RB_node *buffRoot) {
         root = node;
     }
 }
-void RedBlackTree ::balancing(RB_node * node) {//9 82 29 87 27 55 95 67
-    if(node){
-        if(node->parent && node->parent->color == 1 && node->parent->left == node && node->parent->left->color == 1){
-            if(node->parent->parent->left && node->parent->parent->left->color == 1){
-                node->parent->color *= -1;
-                node->parent->parent->color *= -1;
-                node->parent->parent->left->color *= -1;
-                balancing(node->parent->parent);
-            }
-            else{
-                /*if(node->parent->right == node)*/ leftTurn1(node->parent->parent);
-                /*else leftTern2(node->parent->parent);*/
-            }
+void RedBlackTree ::balancing(RB_node * node) {//9 82 29 87 27 55 95 67    44 6 62 23 6 39 76 86 52 83
+        if(node->parent->parent->data < node->data){
+                if(node->parent->parent->left && node->parent->parent->left->color == 1){
+                    node->parent->color *= -1;
+                    if(node->parent->parent != this->root)node->parent->parent->color *= -1;
+                    node->parent->parent->left->color *= -1;
+                    if(node->parent->parent->parent && node->parent->parent->parent->color == 1)balancing(node->parent->parent);
+                }
+                else{
+                    if(!node->parent->parent->left || (node->parent->parent->left->color == -1 && node->parent->parent->left->right == node->parent->parent->left->left)){
+                        if(node->parent->right == node) leftTurn1(node->parent->parent);
+                        else leftTurn2(node->parent->parent);
+                        return;
+                    }
+                }
         }
-        if(node->parent && node->parent->color == 1 && node->parent->left == node && node->parent->left->color == 1){
-            if(node->parent->parent->right && node->parent->parent->right->color == 1){
-                node->parent->color *= -1;
-                node->parent->parent->color *= -1;
-                node->parent->parent->right->color *= -1;
-                balancing(node->parent->parent);
-            }
-            else rightTurn1(node->parent->parent);
+        else{
+                if(node->parent->parent->right && node->parent->parent->right->color == 1){
+                    node->parent->color *= -1;
+                    if(node->parent->parent != this->root)node->parent->parent->color *= -1;
+                    node->parent->parent->right->color *= -1;
+                    if(node->parent->parent->parent && node->parent->parent->parent->color == 1)balancing(node->parent->parent);
+                }
+                else {
+                    if(!node->parent->parent->right || node->parent->parent->right->color == -1 && node->parent->parent->right->right == node->parent->parent->right->left){
+                        if(node->parent->left == node)rightTurn1(node->parent->parent);
+                        else rightTurn2(node->parent->parent);
+                        return;
+                    }
+                }
         }
-    }
 }
 void RedBlackTree::rightTurn1(RB_node * x) {// правый поворот вокруг p
     RB_node *y = x->left;
+    if(this->root == x) this->root = y;
     x->color *= -1;
     y->color *= -1;
     x->left = y->right;
@@ -67,6 +75,37 @@ void RedBlackTree::rightTurn1(RB_node * x) {// правый поворот во�
         else x->parent->right = y;
     x->parent = y;
     y->right = x;
+}
+void RedBlackTree ::rightTurn2(RB_node * node) {
+    RB_node * buff = node;
+    if(node == this->root) this->root = node->left->right;
+    RB_node * lch = node->left->right->left;
+    RB_node * rch = node->left->right->right;
+    node = node->left->right;
+    node->parent = buff->parent;
+    if(buff->parent){
+        if(buff->parent->left == buff) buff->parent->left = node;
+        else buff->parent->right = node;
+    }
+    node->right = buff;
+    node->left = buff->left;
+    node->right->left = nullptr;
+    if(rch){
+        node->left->right = rch;
+        node->left->right->parent = node->left;
+        if(lch) node->left->right->left = lch;
+        node->left->right->left->parent = node->left->right;
+    }
+    else{
+        if(lch){
+            node->left->right = lch;
+            node->left->right->parent = node->left;
+        }
+        else node->left->right = node->left->right = nullptr;
+    }
+    node->right->parent = node->left->parent = node;
+    node->color = -1;
+    node->right->color = 1;
 }
 void RedBlackTree::rightTurnDel(RB_node * x) {// правый поворот вокруг p
     RB_node *y = x->left;
@@ -81,6 +120,7 @@ void RedBlackTree::rightTurnDel(RB_node * x) {// правый поворот в�
 }
 void RedBlackTree::leftTurn1(RB_node * x) {
     RB_node *y = x->right;
+    if(this->root == x) this->root = y;
     x->color *= -1;
     if(this->root == x )y->color = -1;
     else y->color *= -1;
@@ -93,12 +133,17 @@ void RedBlackTree::leftTurn1(RB_node * x) {
     x->parent = y;
     y->left = x;
 }
-void RedBlackTree ::leftTern2(RB_node * node) {
+void RedBlackTree ::leftTurn2(RB_node * node) {
     RB_node * buff = node;
+    if(node == this->root) this->root = node->right->left;
     RB_node * lch = node->right->left->left;
     RB_node * rch = node->right->left->right;
     node = node->right->left;
     node->parent = buff->parent;
+    if(buff->parent){
+        if(buff->parent->left == buff) buff->parent->left = node;
+        else buff->parent->right = node;
+    }
     node->left = buff;
     node->right = buff->right;
     node->left->right = nullptr;

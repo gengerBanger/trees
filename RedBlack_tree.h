@@ -20,7 +20,7 @@ private:
     void rightTurn1(RB_node * node);
     void rightTurn2(RB_node * node);
     void leftTurn1(RB_node * node);
-    void leftTern2(RB_node * node);
+    void leftTurn2(RB_node * node);
     void rightTurnDel(RB_node * node);
     void leftTurnDel(RB_node * node);
 public:
