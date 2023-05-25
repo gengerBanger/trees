@@ -37,7 +37,7 @@ protected:
             delete i;
             delete buffLVL;
         }
-    };
+    }
     void mapRemoving(){
         for(auto iter = mapOfLevels.begin();iter != mapOfLevels.end();iter++ ){
             iter->second.clear();
@@ -94,6 +94,9 @@ public:
         }
         return node;
     }
+    ~tree(){
+        deleteTree(this->root);
+    }
     void print(){
         mapRemoving();
         mapFilling(root, 0);
@@ -144,6 +147,7 @@ public:
         delete increaseDepth;
         delete amountOfSpaces;
     }
+
     void print(std :: ofstream & new_thread){
         mapRemoving();
         mapFilling(root, 0);
@@ -190,7 +194,7 @@ public:
     }
     virtual void insert(int &value) = 0;
     Type * search(int value, Type * node){
-        if(node != nullptr){
+        if(node){
             if(node->data > value) return search(value, node->left);
             if(node->data < value) return search(value, node->right);
             if(node->data == value) return node;

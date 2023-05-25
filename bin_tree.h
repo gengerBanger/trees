@@ -18,7 +18,6 @@ private:
 public:
     BinTree(keysForInput new_key);
     BinTree(const int *arr, const int &demArr);
-    ~BinTree();
     void insert(int &value)override;
     void straightEnumeration (Node * root);
     void reverseEnumeration(Node * root);

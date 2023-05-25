@@ -198,10 +198,13 @@ RedBlackTree::RedBlackTree (keysForInput new_key){
         case keysForInput::consoleKey:{
             int * value = new int;
             while(std :: cin >> *value) {
+                std :: cin.clear();
                 RB_node *item = new RB_node;
                 item->right = nullptr, item->left = nullptr, item->data = *value;
                 recursiveFilling(item, root);
             }
+            std :: cin.clear();
+            while(std :: cin.get() != '\n');
             delete value;
             depth = depthCount(root) + 1;
             amountOfElements = GetSize(GetRoot());
@@ -239,26 +242,29 @@ RedBlackTree :: RedBlackTree(const int *arr, const int &demArr) {
     depth = depthCount(root) + 1;
     amountOfElements = GetSize(GetRoot());
 }
-RedBlackTree :: ~RedBlackTree(){
-    deleteTree(root);
-}
 void RedBlackTree::insert(int &value) {
     RB_node * new_node = new RB_node;
     new_node->right = new_node->left = nullptr;
     new_node->color = 1;
     new_node->data = value;
     recursiveFilling(new_node, this->root);
+    depth = depthCount(root) + 1;
 }
 RB_node * getMinNode(RB_node * node){
-    node = node->right;
-    while (node->left) {
-        node = node->left;
+    node = node->left;
+    while(node->right){
+        node = node->right;
     }
     return node;
 }
 void RedBlackTree ::remove(int value) {
     RB_node * buffres = search(value, root);
     if(buffres){
+        if(buffres->left && buffres->right){
+            RB_node * newNode = getMinNode(buffres);
+            std :: swap(newNode->data,buffres->data);
+            buffres = newNode;
+        }
         if(buffres->color == -1){
             if(buffres->right && !buffres->left) {
                 std :: swap (buffres->data, buffres->right->data);
@@ -273,217 +279,207 @@ void RedBlackTree ::remove(int value) {
                 return;
             }
         }
-        if(buffres->left && buffres->right){
-            std :: swap(getMinNode(buffres)->data,buffres->data);
-            buffres = search(value,root);
-        }
         if(buffres->color == 1 && buffres->left == buffres->right){
             if(buffres->parent->left == buffres) buffres->parent->left = nullptr;
             else buffres->parent->right = nullptr;
             delete buffres;
             return;
         }
-        if(buffres->left == buffres->right && buffres->parent->right->color == -1) rebalancingL(buffres);
-        else rebalancingR(buffres);
-        depth = depthCount(root) + 1;
+        if(buffres->color == -1 && buffres->left == buffres->right){
+            if(buffres->parent->color == 1){
+                if(buffres->parent->left->right == buffres->parent->left->left){
+                    buffres->parent->color = -1;
+                    buffres->parent->left->color = 1;
+                    buffres->parent->left = nullptr;
+                    delete buffres;
+                    return;
+                }
+                if(buffres->parent->right->right == buffres->parent->right->left){
+                    buffres->parent->color = -1;
+                    buffres->parent->right->color = 1;
+                    buffres->parent->left = nullptr;
+                    delete buffres;
+                    return;
+                }
+                if(buffres->parent->left->right->color == 1){
+                    RB_node * parent = buffres->parent;
+                    RB_node * uncle = buffres->parent->left;
+                    rightTurn2(buffres->parent);
+                    uncle->color = -1;
+                    parent->color = 1;
+                    buffres->parent->right = nullptr;
+                    delete buffres;
+                    return;
+                }
+                if(buffres->parent->left->left->color == 1){
+                    RB_node * parent = buffres->parent;
+                    RB_node * uncle = buffres->parent->left;
+                    rightTurn1(buffres->parent);
+                    uncle->color = -1;
+                    parent->color = 1;
+                    buffres->parent->right = nullptr;
+                    delete buffres;
+                    return;
+                }
+                if(buffres->parent->right->right->color == 1){
+                    RB_node * parent = buffres->parent;
+                    RB_node * uncle = buffres->parent->right;
+                    leftTurn1(buffres->parent);
+                    uncle->color = -1;
+                    parent->color = 1;
+                    buffres->parent->left = nullptr;
+                    delete buffres;
+                    return;
+                }
+                if(buffres->parent->right->left->color == 1){
+                    RB_node * parent = buffres->parent;
+                    RB_node * uncle = buffres->parent->right;
+                    leftTurn2(buffres->parent);
+                    uncle->color = -1;
+                    parent->color = 1;
+                    buffres->parent->left = nullptr;
+                    delete buffres;
+                    return;
+                }
+            }
+            else{
+                if(buffres->parent->left->color == 1){
+                    if(buffres->parent->left->left){
+                        RB_node * parent = buffres->parent;
+                        RB_node * uncle = buffres->parent->left->right;
+                        rightTurn1(buffres->parent);
+                        uncle->color = -1;
+                        parent->color = -1;
+                        buffres->parent->right = nullptr;
+                        delete buffres;
+                        return;
+                    }
+                    else{
+                        if(buffres->parent->left->right){
+                            RB_node * parent = buffres->parent;
+                            RB_node * uncle = buffres->parent->left->right;
+                            rightTurn2(buffres->parent);
+                            uncle->color = -1;
+                            parent->color = -1;
+                            buffres->parent->right = nullptr;
+                            delete buffres;
+                            return;
+                        }
+                        else{
+                            if(buffres->parent->left->left->left == buffres->parent->left->left->right){
+                                RB_node * parent = buffres->parent;
+                                RB_node * brother = buffres->parent->left;
+                                rightTurn1(buffres->parent);
+                                parent->color = -1;
+                                brother->color = -1;
+                                buffres->parent->right = nullptr;
+                                delete buffres;
+                                return;
+                            }
+                            if(buffres->parent->left->right->left == buffres->parent->left->right->right){
+                                RB_node * parent = buffres->parent;
+                                RB_node * brother = buffres->parent->left;
+                                rightTurn1(buffres->parent);
+                                parent->color = -1;
+                                brother->color = -1;
+                                buffres->parent->right = nullptr;
+                                delete buffres;
+                                return;
+                            }
+                        }
+                    }
+                }
+                if(buffres->parent->right->color == 1){
+                    if(buffres->parent->right->left){
+                        RB_node * parent = buffres->parent;
+                        RB_node * uncle = buffres->parent->right->left;
+                        leftTurn2(buffres->parent);
+                        uncle->color = -1;
+                        parent->color = -1;
+                        buffres->parent->left = nullptr;
+                        delete buffres;
+                        return;
+                    }
+                    else{
+                        if(buffres->parent->right->right){
+                            RB_node * parent = buffres->parent;
+                            RB_node * uncle = buffres->parent->right->right;
+                            leftTurn1(buffres->parent);
+                            uncle->color = -1;
+                            parent->color = -1;
+                            buffres->parent->left = nullptr;
+                            delete buffres;
+                            return;
+                        }
+                        else{
+                            if(buffres->parent->right->left->left == buffres->parent->right->left->right){
+                                return;
+                            }
+                            if(buffres->parent->right->right->left == buffres->parent->right->right->right){
+                                return;
+                            }
+                        }
+                    }
+                }
+                if(buffres->parent->left->color == -1) {
+                    if(buffres->parent->left->left == buffres->parent->left->right){
+                        buffres->parent->left->color = 1;
+                        buffres->parent->right = nullptr;
+                        delete buffres;
+                        return;
+                    }
+                    if (buffres->parent->left->right) {
+                        RB_node *parent = buffres->parent;
+                        RB_node *uncle = buffres->parent->left->right;
+                        rightTurn2(buffres->parent);
+                        uncle->color = -1;
+                        parent->color = -1;
+                        buffres->parent->right = nullptr;
+                        delete buffres;
+                        return;
+                    }
+                    if (buffres->parent->left->left) {
+                        RB_node *parent = buffres->parent;
+                        RB_node *uncle = buffres->parent->left->left;
+                        rightTurn1(buffres->parent);
+                        uncle->color = -1;
+                        parent->color = -1;
+                        buffres->parent->right = nullptr;
+                        delete buffres;
+                        return;
+                    }
+                }
+                if(buffres->parent->right->color == -1){
+                    if(buffres->parent->right->left == buffres->parent->right->right){
+                        buffres->parent->right->color = 1;
+                        buffres->parent->left = nullptr;
+                        delete buffres;
+                        return;
+                    }
+                    if(buffres->parent->right->left){
+                        RB_node * parent = buffres->parent;
+                        RB_node * uncle = buffres->parent->right->left;
+                        leftTurn2(buffres->parent);
+                        uncle->color = -1;
+                        parent->color = -1;
+                        buffres->parent->left = nullptr;
+                        delete buffres;
+                        return;
+                    }
+                    if(buffres->parent->right->right){
+                        RB_node * parent = buffres->parent;
+                        RB_node * uncle = buffres->parent->right->right;
+                        leftTurn1(buffres->parent);
+                        uncle->color = -1;
+                        parent->color = -1;
+                        buffres->parent->left = nullptr;
+                        delete buffres;
+                        return;
+                    }
+                }
+            }
+        }
     }
     else std :: cout << "Node not found\n";
 }
-void RedBlackTree ::rebalancingR(RB_node *buffres) {
-    if(buffres->parent->left->color == -1){
-        if (buffres->parent->left->left->color == -1 && buffres->parent->left->right->color == 1) {
-            std::swap(buffres->parent->left->right->color, buffres->parent->left->color);
-            leftTurnDel(buffres->parent->left->right);
-            rebalancingR(buffres);
-        }
-        if (buffres->parent->left->left->color == 1) {
-            buffres->parent->left->color = buffres->parent->color;
-            buffres->parent->color = -1;
-            buffres->parent->left->left->color = -1;
-            rightTurnDel(buffres->parent->left);
-            buffres->parent->right = nullptr;
-            delete buffres;
-            return;
-        }
-        if (buffres->parent->left->right->color == -1 && buffres->parent->left->left->color == -1) {
-            buffres->parent->left->color = 1;
-            if (buffres->parent->color == -1) rebalancingL(buffres);
-            else{
-                buffres->parent->right = nullptr;
-                delete buffres;
-                return;
-            }
-        }
-    }
-    if( buffres->parent->left->color == 1) {
-        buffres->parent->color = 1;
-        buffres->parent->left->color = -1;
-        rightTurnDel(buffres->parent->left);
-        rebalancingR(buffres);
-    }
-}
-void RedBlackTree ::rebalancingL(RB_node *buffres) {
-        if (buffres->parent->right->right->color == -1 && buffres->parent->right->left->color == 1) {
-            std::swap(buffres->parent->right->left->color, buffres->parent->right->color);
-            rightTurnDel(buffres->parent->right->left);
-            rebalancingL(buffres);
-        }
-        if (buffres->parent->right->right->color == 1) {
-            buffres->parent->right->color = buffres->parent->color;
-            buffres->parent->color = -1;
-            buffres->parent->right->right->color = -1;
-            leftTurnDel(buffres->parent->right);
-            buffres->parent->left = nullptr;
-            delete buffres;
-            return;
-        }
-        if (buffres->parent->right->right->color == -1 && buffres->parent->right->left->color == -1) {
-            buffres->parent->right->color = 1;
-            if (buffres->parent->color == -1) rebalancingL(buffres);
-            else{
-                buffres->parent->left = nullptr;
-                delete buffres;
-                return;
-            }
-        }
-    if(buffres->left == buffres->right && buffres->parent->right->color == 1) {
-        buffres->parent->color = 1;
-        buffres->parent->right->color = -1;
-        leftTurnDel(buffres->parent->right);
-        rebalancingL(buffres);
-    }
-}
-/*if(value == root->data){
-            if(root->left){
-                RB_node ** buffLeftDescendant = new RB_node *(root->left);
-                RB_node ** buffRightDescendant = new RB_node *(root->right);
-                RB_node * buffMaxNode =  getMaxNode(*buffLeftDescendant);
-                if(*buffRightDescendant){
-                    delete root;
-                    if(buffMaxNode->right){
-                        RB_node * buff = buffMaxNode->right;
-                        if(buffMaxNode->right->left){
-                            buffMaxNode->right = buffMaxNode->right->left;
-                            buff->left = *buffLeftDescendant;
-                        }
-                        else buffMaxNode->right = nullptr;
-                        root = buff;
-                    }
-                    else {
-                        root = buffMaxNode;
-                    }
-                    root->right = *buffRightDescendant;
-                    if(!(buffMaxNode-> right))root->left = *buffLeftDescendant;
-                }
-                else{
-                    delete root;
-                    root = *buffLeftDescendant;
-                }
-                delete buffLeftDescendant;
-                delete buffRightDescendant;
-            }
-            else {
-                RB_node ** newRoot = new RB_node * (root->right);
-                delete root;
-                root = *newRoot;
-                delete newRoot;
-            }
-            root->color = -1;
-            if(root->right) root->right->parent = root;
-            if(root->left) root->left->parent = root;
-        }
-        else{
-            RB_node * searchResult = searchForRemove(value,root);
-            if(searchResult){
-                if(searchResult->left != nullptr && searchResult->left->data == value){ // for removing of left descendant
-                    if(searchResult->left->right  == searchResult->left->left){
-                        delete searchResult->left;
-                        searchResult->left = nullptr;
-                    }
-                    else{
-                        if(searchResult->left->left == nullptr && searchResult->left->right != nullptr){
-                            RB_node ** buffResult = new RB_node *(searchResult->left->right);
-                            delete searchResult->left;
-                            searchResult->left = *buffResult;
-                            searchResult->left->color = *newColor;
-                            *//*searchResult->left->parent = searchResult->left;*//*
-                            delete buffResult;
-                        }
-                        else{
-                            RB_node ** buffLeftDescendant = new RB_node*(searchResult->left->left);
-                            RB_node ** buffRightDescendant = new RB_node *(searchResult->left->right);
-                            RB_node * buffMaxNode =  getMaxNode(*buffLeftDescendant);
-                            if(*buffRightDescendant){
-                                delete searchResult->left;
-                                if(buffMaxNode->right){
-                                    RB_node * buff = buffMaxNode->right;
-                                    if(buffMaxNode->right->left){
-                                        buffMaxNode->right = buffMaxNode->right->left;
-                                        buff->left = *buffLeftDescendant;
-                                    }
-                                    else buffMaxNode->right = nullptr;
-                                    searchResult->left = buff;
 
-                                }
-                                else {
-                                    searchResult->left = buffMaxNode;
-                                }
-                                searchResult->left->right = *buffRightDescendant;
-                                if(!buffMaxNode-> right)searchResult->left->left = *buffLeftDescendant;
-                            }
-                            else{
-                                delete searchResult->left;
-                                searchResult->left = *buffLeftDescendant;
-                            }
-                            searchResult->left->color = *newColor;
-                            delete buffLeftDescendant;
-                            delete buffRightDescendant;
-                        }
-                    }//10 6 8 4 5 3 k
-                }//16 10 3 8 9 7 2 1 15 20 17 14 21 25 k
-                else{ // for removing of right descendant
-                    if(searchResult->right->right  == searchResult->right->left){
-                        delete searchResult->right;
-                        searchResult->right = nullptr;
-                    }
-                    else{
-                        if(searchResult->right->left == nullptr && searchResult->right->right != nullptr){
-                            RB_node ** buffResult = new RB_node *(searchResult->right->right);
-                            delete searchResult->right;
-                            searchResult->right = *buffResult;
-                            searchResult->right->color = *newColor;
-                            delete buffResult;
-                        }
-                        else{
-                            RB_node ** buffLeftDescendant = new RB_node *(searchResult->right->left);
-                            RB_node ** buffRightDescendant = new RB_node *(searchResult->right->right);
-                            RB_node * buffMaxNode =  getMaxNode(*buffLeftDescendant);
-                            if(*buffRightDescendant){
-                                delete searchResult->right;
-                                if(buffMaxNode->right){
-                                    RB_node * buff = buffMaxNode->right;
-                                    if(buffMaxNode->right->left){
-                                        buffMaxNode->right = buffMaxNode->right->left;
-                                        buff->left = *buffLeftDescendant;
-                                    }
-                                    else buffMaxNode->right = nullptr;
-                                    searchResult->right = buff;
-                                }
-                                else {
-                                    searchResult->right = buffMaxNode;
-                                }
-                                searchResult->right->right = *buffRightDescendant;
-                                if(!buffMaxNode-> right)searchResult->right->left = *buffLeftDescendant;
-                            }
-                            else{
-                                delete searchResult->left;
-                                searchResult->left = *buffLeftDescendant;
-                            }
-                            searchResult->right->color = *newColor;
-                            delete buffLeftDescendant;
-                            delete buffRightDescendant;
-                        }
-                    }
-                }
-            }
-        }*/

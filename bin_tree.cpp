@@ -44,6 +44,8 @@ BinTree :: BinTree (keysForInput new_key){
                 item->right = nullptr, item->left = nullptr, item->data = *value;
                 recursiveFilling(item, root);
             }
+            std :: cin.clear();
+            while(std :: cin.get() != '\n');
             delete value;
             depth = depthCount(root) + 1;
             amountOfElements = GetSize(GetRoot());
@@ -80,9 +82,6 @@ BinTree::BinTree(const int *arr, const int &demArr) {
     delete value;
     depth = depthCount(root) + 1;
     amountOfElements = GetSize(GetRoot());
-}
-BinTree :: ~BinTree(){
-    deleteTree(root);
 }
 void BinTree ::insert(int &value) { // inserting a new node
     Node *new_node = new Node;
