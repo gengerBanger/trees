@@ -184,7 +184,7 @@ RedBlackTree::RedBlackTree (keysForInput new_key){
             std :: cin >> *amountOfNodes;
             while(*amountOfNodes){
                 RB_node *item = new RB_node;
-                item->right = nullptr, item->left = nullptr, item->data = rand() % 100;
+                item->right = nullptr, item->left = nullptr, item->data = rand() % 201 - 100;
                 std ::cout << item->data << " / ";
                 recursiveFilling(item, root);
                 (*amountOfNodes)--;

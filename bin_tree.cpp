@@ -28,7 +28,7 @@ BinTree :: BinTree (keysForInput new_key){
             std :: cin >> *amountOfNodes;
             while(*amountOfNodes){
                 Node *item = new Node;
-                item->right = nullptr, item->left = nullptr, item->data = rand() % 100;
+                item->right = nullptr, item->left = nullptr, item->data = rand() % 201 - 100;
                 recursiveFilling(item, root);
                 (*amountOfNodes)--;
             }

@@ -70,7 +70,7 @@ AVLtree::AVLtree(keysForInput new_key) {
                 std :: cin >> *amountOfNodes;
                 while(*amountOfNodes){
                     AVL_node *item = new AVL_node;
-                    item->right = nullptr, item->left = nullptr, item->data = rand() % 100;
+                    item->right = nullptr, item->left = nullptr, item->data = rand() % 201 - 100;
                     std ::cout << item->data << " / ";
                     root = recursiveFillingAVL(item, root);
                     (*amountOfNodes)--;
@@ -162,82 +162,58 @@ AVL_node * AVLtree :: getMinNode(AVL_node * node, std::stack<AVL_node *> & stack
         prev->right = nullptr;
     }
     return node;
-   /* if(node->left){
-        node = node->left;
-        stackForRemove.push(node);
-        while(node->right){
-            node = node->right;
-            stackForRemove.push(node);
-        }
-        return node;
-    }
-    if(node->right){
-        node = node->right;
-        stackForRemove.push(node);
-        while(node->left){
-            node = node->left;
-            stackForRemove.push(node);
-        }
-        return node;
-    }*/
 }
 void AVLtree::remove(int value) {
     std :: stack<AVL_node *> new_stack;
     AVL_node *deleteElement = searchForRemove(value,root , new_stack);
     if(deleteElement){
+        if(root->right == root->left){
+            delete root;
+            root = nullptr;
+            std :: cout << "\t\t tree is empty\n\n";
+            return;
+        }
         if(deleteElement->left && deleteElement->right){
             new_stack.push(deleteElement);
             AVL_node * max = getMinNode(deleteElement->left, new_stack);
-            if(deleteElement->left == max){
-                deleteElement->left = max->left;
-            }
+            if(deleteElement->left == max) deleteElement->left = max->left;
             deleteElement->data = max->data;
             delete max;
-        }else if(deleteElement->left){
-            new_stack.top()->left = deleteElement->left;
-            delete deleteElement;
-        }else if(deleteElement->right){
-            new_stack.top()->right = deleteElement->right;
-            delete deleteElement;
-        }else{
-            if(new_stack.top()->left == deleteElement){
-                new_stack.top()->left = nullptr;
-                delete deleteElement;
-            }else {
-                new_stack.top()->right = nullptr;
-                delete deleteElement;
-            }
         }
-    }else {
-        /*std :: cout <<"Value not found";*/
+        else
+            if(deleteElement->left){
+                new_stack.top()->left = deleteElement->left;
+                delete deleteElement;
+        }
+            else
+                if(deleteElement->right){
+                    new_stack.top()->right = deleteElement->right;
+                     delete deleteElement;
+                }
+                else{
+                    if(new_stack.top()->left == deleteElement){
+                        new_stack.top()->left = nullptr;
+                        delete deleteElement;
+                    }
+                    else {
+                        new_stack.top()->right = nullptr;
+                        delete deleteElement;
+                    }
+                }
     }
+    else return;
     while (!new_stack.empty()){
-        AVL_node *help = new_stack.top();
+        AVL_node *buffNode = new_stack.top();
         if(new_stack.size() == 1){
             balancing(new_stack.top());
             break;
         }
         new_stack.pop();
-        new_stack.top()->left == help ? new_stack.top()->left = balancing(help) : new_stack.top()->right = balancing(help);
+        if(new_stack.top()->left == buffNode) new_stack.top()->left = balancing(buffNode);
+        else new_stack.top()->right = balancing(buffNode);
     }
-/*    std::stack<AVL_node *> new_stack;
-    AVL_node * searchResult = searchForRemove(value,root,new_stack);
-    if(searchResult){
-        if(0){
-
-        }
-        if(searchResult->right == searchResult->left){
-            AVL_node * buff = new_stack.top();
-            if(buff->left == searchResult) buff->left = nullptr;
-            else buff->right = nullptr;
-            delete searchResult;
-            while(!new_stack.empty()){
-                balancing(new_stack.top());
-            }
-        }
-    }*/
-
+    depth = depthCount(root) + 1;
 }
-void AVLtree::recursiveFilling(AVL_node *node, AVL_node *buffroot) {
-    recursiveFillingAVL(node, buffroot);
+void AVLtree::recursiveFilling(AVL_node *node, AVL_node *root) {
+    recursiveFillingAVL(node, root);
 }
