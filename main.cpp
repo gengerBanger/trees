@@ -64,7 +64,9 @@ int main() {
                                     }
                                     auto finish = std :: chrono::high_resolution_clock::now();
                                     std :: chrono :: duration <float> duration = finish - start;
+                                    SetConsoleTextAttribute(h_1Console, 14);
                                     std :: cout << "Search time ---> "<< duration.count()<<" sec\n";
+                                    SetConsoleTextAttribute(h_1Console, 11);
                                     break;
                                 }
                                 case 2:{
@@ -76,7 +78,9 @@ int main() {
                                     auto finish = std :: chrono::high_resolution_clock::now();
                                     new_tree.print();
                                     std :: chrono :: duration <float> duration = finish - start;
+                                    SetConsoleTextAttribute(h_1Console, 14);
                                     std :: cout << "Remove time ---> "<< duration.count()<<" sec\n";
+                                    SetConsoleTextAttribute(h_1Console, 11);
                                     break;
                                 }
                                 case 3:{
@@ -88,7 +92,9 @@ int main() {
                                     auto finish = std :: chrono::high_resolution_clock::now();
                                     new_tree.print();
                                     std :: chrono :: duration <float> duration = finish - start;
+                                    SetConsoleTextAttribute(h_1Console, 14);
                                     std :: cout << "Insert time ---> "<< duration.count()<<" sec\n";
+                                    SetConsoleTextAttribute(h_1Console, 11);
                                     break;
                                 }
                                 case 4:{
@@ -104,7 +110,9 @@ int main() {
                                                 auto finish = std :: chrono::high_resolution_clock::now();
                                                 std :: chrono :: duration <float> duration = finish - start;
                                                 std :: cout << '\n';
+                                                SetConsoleTextAttribute(h_1Console, 14);
                                                 std :: cout << "Straight enumeration time ---> "<< duration.count()<<" sec\n";
+                                                SetConsoleTextAttribute(h_1Console, 11);
                                                 break;
                                             }
                                             case 2:{
@@ -114,7 +122,9 @@ int main() {
                                                 auto finish = std :: chrono::high_resolution_clock::now();
                                                 std :: chrono :: duration <float> duration = finish - start;
                                                 std :: cout << '\n';
+                                                SetConsoleTextAttribute(h_1Console, 14);
                                                 std :: cout << "Reverse enumeration time ---> "<< duration.count()<<" sec\n";
+                                                SetConsoleTextAttribute(h_1Console, 11);
                                                 break;
                                             }
                                             case 3:{
@@ -124,7 +134,9 @@ int main() {
                                                 auto finish = std :: chrono::high_resolution_clock::now();
                                                 std :: chrono :: duration <float> duration = finish - start;
                                                 std :: cout << '\n';
+                                                SetConsoleTextAttribute(h_1Console, 14);
                                                 std :: cout << "Symmetrical enumeration time ---> "<< duration.count()<<" sec\n";
+                                                SetConsoleTextAttribute(h_1Console, 11);
                                                 break;
                                             }
                                             case 4:{
@@ -177,7 +189,9 @@ int main() {
                             }
                             auto finish = std :: chrono::high_resolution_clock::now();
                             std :: chrono :: duration <float> duration = finish - start;
+                            SetConsoleTextAttribute(h_1Console, 14);
                             std :: cout << "Search time ---> "<< duration.count()<<" sec\n";
+                            SetConsoleTextAttribute(h_1Console, 11);
                             break;
                         }
                         case 2:{
@@ -189,7 +203,9 @@ int main() {
                             auto finish = std :: chrono::high_resolution_clock::now();
                             new_tree.print();
                             std :: chrono :: duration <float> duration = finish - start;
+                            SetConsoleTextAttribute(h_1Console, 14);
                             std :: cout << "Remove time ---> "<< duration.count()<<" sec\n";
+                            SetConsoleTextAttribute(h_1Console, 11);
                             break;
                         }
                         case 3:{
@@ -201,7 +217,9 @@ int main() {
                             auto finish = std :: chrono::high_resolution_clock::now();
                             new_tree.print();
                             std :: chrono :: duration <float> duration = finish - start;
+                            SetConsoleTextAttribute(h_1Console, 14);
                             std :: cout << "Insert time ---> "<< duration.count()<<" sec\n";
+                            SetConsoleTextAttribute(h_1Console, 11);
                             break;
                         }
                         case 4:{
@@ -217,7 +235,9 @@ int main() {
                                         auto finish = std :: chrono::high_resolution_clock::now();
                                         std :: chrono :: duration <float> duration = finish - start;
                                         std :: cout << '\n';
+                                        SetConsoleTextAttribute(h_1Console, 14);
                                         std :: cout << "Straight enumeration time ---> "<< duration.count()<<" sec\n";
+                                        SetConsoleTextAttribute(h_1Console, 11);
                                         break;
                                     }
                                     case 2:{
@@ -227,7 +247,9 @@ int main() {
                                         auto finish = std :: chrono::high_resolution_clock::now();
                                         std :: chrono :: duration <float> duration = finish - start;
                                         std :: cout << '\n';
+                                        SetConsoleTextAttribute(h_1Console, 14);
                                         std :: cout << "Reverse enumeration time ---> "<< duration.count()<<" sec\n";
+                                        SetConsoleTextAttribute(h_1Console, 11);
                                         break;
                                     }
                                     case 3:{
@@ -237,7 +259,9 @@ int main() {
                                         auto finish = std :: chrono::high_resolution_clock::now();
                                         std :: chrono :: duration <float> duration = finish - start;
                                         std :: cout << '\n';
+                                        SetConsoleTextAttribute(h_1Console, 14);
                                         std :: cout << "Symmetrical enumeration time ---> "<< duration.count()<<" sec\n";
+                                        SetConsoleTextAttribute(h_1Console, 11);
                                         break;
                                     }
                                     case 4:{
@@ -301,7 +325,9 @@ int main() {
                                     }
                                     auto finish = std :: chrono::high_resolution_clock::now();
                                     std :: chrono :: duration <float> duration = finish - start;
+                                    SetConsoleTextAttribute(h_1Console, 14);
                                     std :: cout << "Search time ---> "<< duration.count()<<" sec\n";
+                                    SetConsoleTextAttribute(h_1Console, 11);
                                     break;
                                 }
                                 case 2:{
@@ -313,7 +339,9 @@ int main() {
                                     auto finish = std :: chrono::high_resolution_clock::now();
                                     new_tree.print();
                                     std :: chrono :: duration <float> duration = finish - start;
+                                    SetConsoleTextAttribute(h_1Console, 14);
                                     std :: cout << "Remove time ---> "<< duration.count()<<" sec\n";
+                                    SetConsoleTextAttribute(h_1Console, 11);
                                     break;
                                 }
                                 case 3:{
@@ -325,7 +353,9 @@ int main() {
                                     auto finish = std :: chrono::high_resolution_clock::now();
                                     new_tree.print();
                                     std :: chrono :: duration <float> duration = finish - start;
+                                    SetConsoleTextAttribute(h_1Console, 14);
                                     std :: cout << "Insert time ---> "<< duration.count()<<" sec\n";
+                                    SetConsoleTextAttribute(h_1Console, 11);
                                     break;
                                 }
                                 case 4:{
@@ -341,7 +371,9 @@ int main() {
                                                 auto finish = std :: chrono::high_resolution_clock::now();
                                                 std :: chrono :: duration <float> duration = finish - start;
                                                 std :: cout << '\n';
+                                                SetConsoleTextAttribute(h_1Console, 14);
                                                 std :: cout << "Straight enumeration time ---> "<< duration.count()<<" sec\n";
+                                                SetConsoleTextAttribute(h_1Console, 11);
                                                 break;
                                             }
                                             case 2:{
@@ -351,7 +383,9 @@ int main() {
                                                 auto finish = std :: chrono::high_resolution_clock::now();
                                                 std :: chrono :: duration <float> duration = finish - start;
                                                 std :: cout << '\n';
+                                                SetConsoleTextAttribute(h_1Console, 14);
                                                 std :: cout << "Reverse enumeration time ---> "<< duration.count()<<" sec\n";
+                                                SetConsoleTextAttribute(h_1Console, 11);
                                                 break;
                                             }
                                             case 3:{
@@ -361,7 +395,9 @@ int main() {
                                                 auto finish = std :: chrono::high_resolution_clock::now();
                                                 std :: chrono :: duration <float> duration = finish - start;
                                                 std :: cout << '\n';
+                                                SetConsoleTextAttribute(h_1Console, 14);
                                                 std :: cout << "Symmetrical enumeration time ---> "<< duration.count()<<" sec\n";
+                                                SetConsoleTextAttribute(h_1Console, 11);
                                                 break;
                                             }
                                             case 4:{

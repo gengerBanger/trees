@@ -82,7 +82,8 @@ BinTree::BinTree(const int *arr, const int &demArr) {
     int * value = new int;
     for(int i = 0; i < demArr;i++){
         Node *item = new Node;
-        item->right = nullptr, item->left = nullptr, item->data = arr[i];
+        item->right = nullptr, item->left = nullptr;
+        item->data = arr[i];
         recursiveFilling(item, root);
     }
     delete value;
