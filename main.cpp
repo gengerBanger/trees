@@ -26,7 +26,9 @@ int main() {
                         std :: cin.clear();
                         std :: cin >> keyChoice;
                         Test <BinTree> new_test(keyChoice);
-                        std :: cout << "\t~~Tests are ready~~\n";
+                        SetConsoleTextAttribute(h_1Console, 14);
+                        std :: cout << "\t\t~~Tests are ready~~\n";
+                        SetConsoleTextAttribute(h_1Console, 11);
                     }
                     case 2:{
                         std :: cout <<"\t~~How you want to create a new tree~~\n1) Random values\n2) Console values\n3) Values from file\n";
@@ -149,7 +151,9 @@ int main() {
                         std::cin.clear();
                         std::cin >> keyChoice;
                         Test<AVLtree> new_test(keyChoice);
-                        std :: cout << "\t~~Tests are ready~~\n";
+                        SetConsoleTextAttribute(h_1Console, 14);
+                        std :: cout << "\t\t~~Tests are ready~~\n";
+                        SetConsoleTextAttribute(h_1Console, 11);
                     }
                     case 2:{
                         std :: cout <<"\t~~How you want to create a new tree~~\n1) Random values\n2) Console values\n3) Values from file\n";

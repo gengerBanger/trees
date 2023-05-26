@@ -135,9 +135,8 @@ public:
                     std :: cout << *iterVec;
                     evenSpace++;
                     if(evenSpace % 4 == 0){
-                        for(int i = 0; i < floor(float(*increaseDepth) / float(*amountOfSpaces / 4) - 1) ;i++){
-                            std :: cout << " ";
-                        }
+                        if(iterMap->first < 5) for(int i = 0; i < floor(float(*increaseDepth) / float(*amountOfSpaces / 4) - 1) ;i++) std :: cout << " ";
+                        else for(int i = 0; i < floor(float(*increaseDepth) / float(*amountOfSpaces / 4)) ;i++) std :: cout << " ";
                     }
                     else{
                         if(evenSpace % 2 != 0){
@@ -186,14 +185,20 @@ public:
                     buffIter--;
                     new_thread <<*iterVec;
                     evenSpace++;
-                    if(evenSpace % 2 != 0){
-                        for(int i = 0; i < floor(float(*increaseDepth) / float(*amountOfSpaces / 4));i++){
-                            new_thread << '_';
-                        }
+                    if(evenSpace % 4 == 0){
+                        if(iterMap->first < 5) for(int i = 0; i < floor(float(*increaseDepth) / float(*amountOfSpaces / 4) - 1) ;i++) new_thread << " ";
+                        else for(int i = 0; i < floor(float(*increaseDepth) / float(*amountOfSpaces / 4)) ;i++) new_thread << " ";
                     }
-                    else for(int i = 0; i < floor(float(*increaseDepth) / float(*amountOfSpaces / 4) - 1) ;i++){
-                            new_thread << ' ';
+                    else{
+                        if(evenSpace % 2 != 0){
+                            for(int i = 0; i < floor(float(*increaseDepth) / float(*amountOfSpaces / 4));i++){
+                                new_thread << '_';
+                            }
                         }
+                        else if(iterMap->first < 5) for(int i = 0; i < floor(float(*increaseDepth) / float(*amountOfSpaces / 4) - 1) ;i++){
+                                new_thread << ' ';
+                            }
+                    }
                 }
                 else{
                     new_thread <<*iterVec;

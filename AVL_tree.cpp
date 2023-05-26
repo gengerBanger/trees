@@ -70,12 +70,16 @@ AVLtree::AVLtree(keysForInput new_key) {
                 std :: cin >> *amountOfNodes;
                 while(*amountOfNodes){
                     AVL_node *item = new AVL_node;
-                    item->right = nullptr, item->left = nullptr, item->data = rand() % 201 - 100;
+                    item->right = nullptr, item->left = nullptr;
+                    do{
+                        item->data = rand() % 201 - 100;
+                    }
+                    while(search(item->data, root));
                     std ::cout << item->data << " / ";
                     root = recursiveFillingAVL(item, root);
                     (*amountOfNodes)--;
                 }
-                std :: cout << '\n';
+                std :: cout << "\n\n";
                 delete amountOfNodes;
                 depth = depthCount(root) + 1;
                 amountOfElements = GetSize(GetRoot());

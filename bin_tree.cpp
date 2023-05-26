@@ -28,10 +28,16 @@ BinTree :: BinTree (keysForInput new_key){
             std :: cin >> *amountOfNodes;
             while(*amountOfNodes){
                 Node *item = new Node;
-                item->right = nullptr, item->left = nullptr, item->data = rand() % 201 - 100;
+                item->right = nullptr, item->left = nullptr;
+                do{
+                    item->data = rand() % 201 - 100;
+                }
+                while(search(item->data, root));
+                std ::cout << item->data << " / ";
                 recursiveFilling(item, root);
                 (*amountOfNodes)--;
             }
+            std :: cout << "\n\n";
             delete amountOfNodes;
             depth = depthCount(root) + 1;
             amountOfElements = GetSize(GetRoot());
