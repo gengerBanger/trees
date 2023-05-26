@@ -5,8 +5,12 @@
 #include "tree.h"
 #include "AVL_tree.h"
 #include <Windows.h>
+#include <chrono>
+#include <iomanip>
 HANDLE h_1Console;
 int main() {
+    std :: cout << std :: setprecision(10);
+    std :: cout.setf(std :: ios_base::fixed);
     h_1Console = GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(h_1Console, 11);
     int keyChoice;
@@ -47,6 +51,7 @@ int main() {
                                     std :: cout << "~~Enter the value you want tot search~~\n";
                                     std :: cin.clear();
                                     std :: cin >> keyChoice;
+                                    auto start = std :: chrono::high_resolution_clock::now();
                                     if(new_tree.search(keyChoice,new_tree.GetRoot())){
                                         SetConsoleTextAttribute(h_1Console, 10);
                                         std :: cout << "~~Value found~~\n";
@@ -57,22 +62,33 @@ int main() {
                                         std :: cout << "~~Value not found~~\n";
                                         SetConsoleTextAttribute(h_1Console, 11);
                                     }
+                                    auto finish = std :: chrono::high_resolution_clock::now();
+                                    std :: chrono :: duration <float> duration = finish - start;
+                                    std :: cout << "Search time ---> "<< duration.count()<<" sec\n";
                                     break;
                                 }
                                 case 2:{
                                     std :: cout << "~~Enter the value you want tot delete~~\n";
                                     std :: cin.clear();
                                     std :: cin >> keyChoice;
+                                    auto start = std :: chrono::high_resolution_clock::now();
                                     new_tree.remove(keyChoice);
+                                    auto finish = std :: chrono::high_resolution_clock::now();
                                     new_tree.print();
+                                    std :: chrono :: duration <float> duration = finish - start;
+                                    std :: cout << "Remove time ---> "<< duration.count()<<" sec\n";
                                     break;
                                 }
                                 case 3:{
                                     std :: cout << "~~Enter the value you want tot insert~~\n";
                                     std :: cin.clear();
                                     std :: cin >> keyChoice;
+                                    auto start = std :: chrono::high_resolution_clock::now();
                                     new_tree.insert(keyChoice);
+                                    auto finish = std :: chrono::high_resolution_clock::now();
                                     new_tree.print();
+                                    std :: chrono :: duration <float> duration = finish - start;
+                                    std :: cout << "Insert time ---> "<< duration.count()<<" sec\n";
                                     break;
                                 }
                                 case 4:{
@@ -83,20 +99,32 @@ int main() {
                                         switch (keyChoice) {
                                             case 1:{
                                                 std :: cout << "\tStraight enumeration : \n";
+                                                auto start = std :: chrono::high_resolution_clock::now();
                                                 new_tree.straightEnumeration(new_tree.GetRoot());
+                                                auto finish = std :: chrono::high_resolution_clock::now();
+                                                std :: chrono :: duration <float> duration = finish - start;
                                                 std :: cout << '\n';
+                                                std :: cout << "Straight enumeration time ---> "<< duration.count()<<" sec\n";
                                                 break;
                                             }
                                             case 2:{
                                                 std :: cout << "\tReverse enumeration : \n";
+                                                auto start = std :: chrono::high_resolution_clock::now();
                                                 new_tree.reverseEnumeration(new_tree.GetRoot());
+                                                auto finish = std :: chrono::high_resolution_clock::now();
+                                                std :: chrono :: duration <float> duration = finish - start;
                                                 std :: cout << '\n';
+                                                std :: cout << "Reverse enumeration time ---> "<< duration.count()<<" sec\n";
                                                 break;
                                             }
                                             case 3:{
                                                 std :: cout << "\tSymmetrical enumeration : \n";
+                                                auto start = std :: chrono::high_resolution_clock::now();
                                                 new_tree.symmetricalEnumeration(new_tree.GetRoot());
+                                                auto finish = std :: chrono::high_resolution_clock::now();
+                                                std :: chrono :: duration <float> duration = finish - start;
                                                 std :: cout << '\n';
+                                                std :: cout << "Symmetrical enumeration time ---> "<< duration.count()<<" sec\n";
                                                 break;
                                             }
                                             case 4:{
@@ -136,6 +164,7 @@ int main() {
                             std :: cout << "~~Enter the value you want tot search~~\n";
                             std :: cin.clear();
                             std :: cin >> keyChoice;
+                            auto start = std :: chrono::high_resolution_clock::now();
                             if(new_tree.search(keyChoice,new_tree.GetRoot())){
                                 SetConsoleTextAttribute(h_1Console, 10);
                                 std :: cout << "~~Value found~~\n";
@@ -146,22 +175,33 @@ int main() {
                                 std :: cout << "~~Value not found~~\n";
                                 SetConsoleTextAttribute(h_1Console, 11);
                             }
+                            auto finish = std :: chrono::high_resolution_clock::now();
+                            std :: chrono :: duration <float> duration = finish - start;
+                            std :: cout << "Search time ---> "<< duration.count()<<" sec\n";
                             break;
                         }
                         case 2:{
                             std :: cout << "~~Enter the value you want tot delete~~\n";
                             std :: cin.clear();
                             std :: cin >> keyChoice;
+                            auto start = std :: chrono::high_resolution_clock::now();
                             new_tree.remove(keyChoice);
+                            auto finish = std :: chrono::high_resolution_clock::now();
                             new_tree.print();
+                            std :: chrono :: duration <float> duration = finish - start;
+                            std :: cout << "Remove time ---> "<< duration.count()<<" sec\n";
                             break;
                         }
                         case 3:{
                             std :: cout << "~~Enter the value you want tot insert~~\n";
                             std :: cin.clear();
                             std :: cin >> keyChoice;
+                            auto start = std :: chrono::high_resolution_clock::now();
                             new_tree.insert(keyChoice);
+                            auto finish = std :: chrono::high_resolution_clock::now();
                             new_tree.print();
+                            std :: chrono :: duration <float> duration = finish - start;
+                            std :: cout << "Insert time ---> "<< duration.count()<<" sec\n";
                             break;
                         }
                         case 4:{
@@ -172,20 +212,32 @@ int main() {
                                 switch (keyChoice) {
                                     case 1:{
                                         std :: cout << "\tStraight enumeration : \n";
+                                        auto start = std :: chrono::high_resolution_clock::now();
                                         new_tree.straightEnumeration(new_tree.GetRoot());
+                                        auto finish = std :: chrono::high_resolution_clock::now();
+                                        std :: chrono :: duration <float> duration = finish - start;
                                         std :: cout << '\n';
+                                        std :: cout << "Straight enumeration time ---> "<< duration.count()<<" sec\n";
                                         break;
                                     }
                                     case 2:{
                                         std :: cout << "\tReverse enumeration : \n";
+                                        auto start = std :: chrono::high_resolution_clock::now();
                                         new_tree.reverseEnumeration(new_tree.GetRoot());
+                                        auto finish = std :: chrono::high_resolution_clock::now();
+                                        std :: chrono :: duration <float> duration = finish - start;
                                         std :: cout << '\n';
+                                        std :: cout << "Reverse enumeration time ---> "<< duration.count()<<" sec\n";
                                         break;
                                     }
                                     case 3:{
                                         std :: cout << "\tSymmetrical enumeration : \n";
+                                        auto start = std :: chrono::high_resolution_clock::now();
                                         new_tree.symmetricalEnumeration(new_tree.GetRoot());
+                                        auto finish = std :: chrono::high_resolution_clock::now();
+                                        std :: chrono :: duration <float> duration = finish - start;
                                         std :: cout << '\n';
+                                        std :: cout << "Symmetrical enumeration time ---> "<< duration.count()<<" sec\n";
                                         break;
                                     }
                                     case 4:{
@@ -236,6 +288,7 @@ int main() {
                                     std :: cout << "~~Enter the value you want tot search~~\n";
                                     std :: cin.clear();
                                     std :: cin >> keyChoice;
+                                    auto start = std :: chrono::high_resolution_clock::now();
                                     if(new_tree.search(keyChoice,new_tree.GetRoot())){
                                         SetConsoleTextAttribute(h_1Console, 10);
                                         std :: cout << "~~Value found~~\n";
@@ -246,22 +299,33 @@ int main() {
                                         std :: cout << "~~Value not found~~\n";
                                         SetConsoleTextAttribute(h_1Console, 11);
                                     }
+                                    auto finish = std :: chrono::high_resolution_clock::now();
+                                    std :: chrono :: duration <float> duration = finish - start;
+                                    std :: cout << "Search time ---> "<< duration.count()<<" sec\n";
                                     break;
                                 }
                                 case 2:{
                                     std :: cout << "~~Enter the value you want tot delete~~\n";
                                     std :: cin.clear();
                                     std :: cin >> keyChoice;
+                                    auto start = std :: chrono::high_resolution_clock::now();
                                     new_tree.remove(keyChoice);
+                                    auto finish = std :: chrono::high_resolution_clock::now();
                                     new_tree.print();
+                                    std :: chrono :: duration <float> duration = finish - start;
+                                    std :: cout << "Remove time ---> "<< duration.count()<<" sec\n";
                                     break;
                                 }
                                 case 3:{
                                     std :: cout << "~~Enter the value you want tot insert~~\n";
                                     std :: cin.clear();
                                     std :: cin >> keyChoice;
+                                    auto start = std :: chrono::high_resolution_clock::now();
                                     new_tree.insert(keyChoice);
+                                    auto finish = std :: chrono::high_resolution_clock::now();
                                     new_tree.print();
+                                    std :: chrono :: duration <float> duration = finish - start;
+                                    std :: cout << "Insert time ---> "<< duration.count()<<" sec\n";
                                     break;
                                 }
                                 case 4:{
@@ -272,20 +336,32 @@ int main() {
                                         switch (keyChoice) {
                                             case 1:{
                                                 std :: cout << "\tStraight enumeration : \n";
+                                                auto start = std :: chrono::high_resolution_clock::now();
                                                 new_tree.straightEnumeration(new_tree.GetRoot());
+                                                auto finish = std :: chrono::high_resolution_clock::now();
+                                                std :: chrono :: duration <float> duration = finish - start;
                                                 std :: cout << '\n';
+                                                std :: cout << "Straight enumeration time ---> "<< duration.count()<<" sec\n";
                                                 break;
                                             }
                                             case 2:{
                                                 std :: cout << "\tReverse enumeration : \n";
+                                                auto start = std :: chrono::high_resolution_clock::now();
                                                 new_tree.reverseEnumeration(new_tree.GetRoot());
+                                                auto finish = std :: chrono::high_resolution_clock::now();
+                                                std :: chrono :: duration <float> duration = finish - start;
                                                 std :: cout << '\n';
+                                                std :: cout << "Reverse enumeration time ---> "<< duration.count()<<" sec\n";
                                                 break;
                                             }
                                             case 3:{
                                                 std :: cout << "\tSymmetrical enumeration : \n";
+                                                auto start = std :: chrono::high_resolution_clock::now();
                                                 new_tree.symmetricalEnumeration(new_tree.GetRoot());
+                                                auto finish = std :: chrono::high_resolution_clock::now();
+                                                std :: chrono :: duration <float> duration = finish - start;
                                                 std :: cout << '\n';
+                                                std :: cout << "Symmetrical enumeration time ---> "<< duration.count()<<" sec\n";
                                                 break;
                                             }
                                             case 4:{
