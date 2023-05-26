@@ -16,7 +16,6 @@ protected:
     int depth = 0;
     int amountOfElements = 0;
     std :: map <int, std :: vector< std :: string>> mapOfLevels;
-
     void mapFilling(Type * buffRoot, int level){
         if(buffRoot){
             mapOfLevels[level].push_back(std ::to_string(buffRoot->data));
@@ -195,7 +194,7 @@ public:
                                 new_thread << '_';
                             }
                         }
-                        else if(iterMap->first < 5) for(int i = 0; i < floor(float(*increaseDepth) / float(*amountOfSpaces / 4) - 1) ;i++){
+                        else for(int i = 0; i < floor(float(*increaseDepth) / float(*amountOfSpaces / 4)) ;i++){
                                 new_thread << ' ';
                             }
                     }
@@ -221,7 +220,6 @@ public:
         }
         else return nullptr;
     }
-
     virtual void remove(int value){
         if(search(value, root)){
             if(value == root->data){
@@ -362,5 +360,27 @@ public:
         }
         else std :: cout << "Node not found\n";
     }
+    void straightEnumeration(Type * root) {
+        if(root){
+            std :: cout << std::to_string(root->data) + ' ';
+            straightEnumeration(root->left);
+            straightEnumeration(root->right);
+        }
+    }
+    void reverseEnumeration(Type * root) {
+        if(root){
+            reverseEnumeration(root->left);
+            reverseEnumeration(root->right);
+            std :: cout << std::to_string(root->data) + ' ';
+        }
+    }
+    void symmetricalEnumeration(Type * root) {
+        if(root){
+            symmetricalEnumeration(root->left);
+            std :: cout << std::to_string(root->data) + ' ';
+            symmetricalEnumeration(root->right);
+        }
+    }
 };
+
 #endif //BIN_TREE_TREE_H

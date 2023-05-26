@@ -96,26 +96,3 @@ void BinTree ::insert(int &value) { // inserting a new node
     recursiveFilling(new_node,root);
     depth = depthCount(root) + 1;
 }
-
-void BinTree :: straightEnumeration(Node * root) {
-    if(root){
-        std :: cout << std::to_string(root->data) + ' ';
-        straightEnumeration(root->left);
-        straightEnumeration(root->right);
-    }
-}
-void BinTree :: reverseEnumeration(Node * root) {
-    if(root){
-        straightEnumeration(root->left);
-        straightEnumeration(root->right);
-        std :: cout << std::to_string(root->data) + ' ';
-    }
-}
-void BinTree ::symmetricalEnumeration(Node * root) {
-    if(root){
-        straightEnumeration(root->left);
-        std :: cout << std::to_string(root->data) + ' ';
-        straightEnumeration(root->right);
-    }
-}
-
